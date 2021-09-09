@@ -13,6 +13,7 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.cyberburyatenterprise.textme.R;
 import com.cyberburyatenterprise.textme.databinding.FragmentLoginBinding;
@@ -96,7 +97,12 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        binding.progressBarLogin.setVisibility(View.GONE);
                         authViewModel.setHasUserBeenLoggedIn(true);
+                    }
+                    else{
+                        binding.progressBarLogin.setVisibility(View.GONE);
+                        Toast.makeText(LoginFragment.this.getContext(), "Login failed, try again", Toast.LENGTH_LONG).show();
                     }
                 }
             });
